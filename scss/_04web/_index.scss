@@ -1,0 +1,337 @@
+@use '../_01variable/01Var' as V;
+@use '../_02mixins/01media' as R;
+@use '../_02mixins/02WH' as WH;
+@use '../_02mixins/03images' as I;
+@use '../_02mixins/04animation' as A;
+@use '../_02mixins/05Round' as Rd;
+
+@include R.Rwd(xs){
+    %WHIn{
+        @include WH.WH(10%, 10%);
+    }
+    %W100{
+        @include WH.W(10%);
+    }
+    %DisplayNoneIn{
+        display: none;
+    }
+    %JustifyAlign{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #rest1{
+        @extend %WHIn;
+
+        > #resta{
+            @extend %WHIn;
+            position: fixed;
+
+            ul{
+                @extend %WHIn;
+                position: relative;
+                display: flex;
+
+                li{
+                    @extend %WHIn;
+                    position: absolute;
+                    opacity: 0;
+                    filter: alpha(opacity=0);
+                    -webkit-filter: alphe(opacity=0);
+                    @include A.round();
+                    
+
+                    span{
+                        @extend %WHIn;
+                        
+                    }
+                }
+                .Images1{
+                    @include I.Images(no-repeat, center, cover, 0, photo, "001.jpg");
+                }
+                .Images2{
+                    @include I.Images(no-repeat, center, cover, 0, photo, "002.jpg");
+                }
+                .Images3{
+                    @include I.Images(no-repeat, center, cover, 0, photo, "003.jpg");
+                }
+                .Images4{
+                    @include I.Images(no-repeat, center, cover, 0, photo, "004.jpg");
+                }
+                .Images5{
+                    @include I.Images(no-repeat, center, cover, 0, photo, "005.jpg");
+                }
+                @include A.delay;
+            }
+        
+        }
+
+        $HeaderH: 10%;
+        > header{
+            @include WH.WH(10%, calc( $HeaderH / 10 ));
+            position: absolute;
+            z-index: V.$z-index25;
+            position: fixed;
+            top: 0;
+            display: flex;
+            flex-wrap: nowrap;
+            background-color: V.$BlueColor;
+
+            $MenuWidth:15%;
+            #menu{
+                width: $MenuWidth;
+                height: 100%;
+                //background-color: antiquewhite;
+                @include I.Images(no-repeat, center, contain, -9999px, icons, "list.svg");
+            }
+            #Logo{
+                width: calc( 100% - $MenuWidth );
+                @extend %JustifyAlign;
+                //background-color: blue;
+
+                a{
+                    color: rgb(39, 62, 86);
+                }
+            }
+            .ConnBox{
+                @extend %DisplayNoneIn;
+            }
+        }
+
+        > #PhoneMenu{
+            @extend %DisplayNoneIn;
+            @extend %WHIn;
+            position: absolute;
+            top: 0;
+            position: fixed;
+            z-index: V.$z-index30;
+            background-color: rgb(94, 94, 94);
+
+            $MH: 15%;
+            $Fh: 7%;
+
+            > #menuheader{
+                @extend %W100;
+                height: $MH;
+                background-color: V.$BlueColor;
+
+                #close{
+                    width: 10%;
+                    color: white;
+                    font-size: 1rem * 1.8;
+                    text-align: center;
+                    margin-right: 0;
+                }
+                h1{
+                    @extend %JustifyAlign;
+                    font-size: 1rem * 2;
+
+                    a{
+                        color: rgb(39, 62, 86);
+                    }
+                }
+            }
+            > #menunav{
+                width: 85%;
+                height: calc( 100% - $MH - $Fh );
+                overflow-y: auto;
+
+                h2{
+                    margin: {
+                        top: 20px;
+                        bottom: 3px;
+                    }
+                    border-bottom: 2px solid rgb(188, 188, 188);
+                    color: rgb(231, 231, 231);
+                }
+                ul{
+                    width: 90%;
+                    margin-right: 0;
+                    font-size: 1rem * 1.2;
+
+                    li{
+                        margin: {
+                            top: 5px;
+                            bottom: 5px;
+                        }
+                    }
+                    a{
+                        color: rgb(195, 220, 239);
+                    }
+                }
+            }
+            > #menuicon{
+                width: 90%;
+                height: $Fh;
+                border-top: 2px solid rgb(39, 62, 86);
+                @extend %JustifyAlign;
+            }
+
+        }
+
+        > #main{
+            @extend %W100;
+            height: calc( 100% - $HeaderH );
+            position: relative;
+            z-index: V.$z-index20;
+            top: $HeaderH;
+            //margin-top: 65px;
+            //background-color: aqua;
+
+            nav{
+                @extend %W100;
+                height: 84%;
+                position: absolute;
+                //margin-top: $HeaderH;
+                $UlH: 20px;
+                //background-color: brown;
+                ul{
+                    width: 90%;
+                    height: 84%;
+                    //margin-top: $HeaderH;
+                    //background-color: aqua;s
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    li{
+                        width: calc( 90% / 2);
+                        //background-color: aquamarine;
+                        height: 35%;
+                        margin-top: $UlH;
+                        @include Rd.RoundAll(15px);
+
+                        a{
+                            height: 90%;
+                            font-size: 1rem * 1.5;
+                            display: flex;
+                            justify-content: center;
+                            align-items: flex-end;
+                            color: white;
+
+                            span{
+                                width: 60%;
+                                text-align: center;
+                                background-color: rgba(100, 100, 99, 0.575);
+                                @include Rd.RoundAll(15px);
+                                
+                            }
+                        }
+                    }
+                    .one{
+                        @include I.Images(no-repeat, center, contain, 0, butn, "01.png");
+                    }
+                    .two{
+                        @include I.Images(no-repeat, center, contain, 0, butn, "02.png");
+                    }
+                    .three{
+                        @include I.Images(no-repeat, center, contain, 0, butn, "03.png");
+                    }
+                    .four{
+                        @include I.Images(no-repeat, center, contain, 0, butn, "04.png");
+                    }
+                    .five{
+                        @include I.Images(no-repeat, center, contain, 0, butn, "05.png");
+                    }
+                    .six{
+                        margin-bottom: $UlH;
+                        @include I.Images(no-repeat, center, contain, 0, butn, "06.png");
+                    }
+                }
+
+            }
+
+            > footer{
+                @extend %W100;
+                height: 15.5%;
+                position: absolute;
+                bottom: 0;
+                color: rgb(253, 254, 255);
+                font-size: 1rem * 0.8;
+                text-align: center;
+                //background-color: rgba(193, 193, 193, 0.187);
+                //@include Rd.Round(100px, 100px, 0, 0);
+                //background-color: rgb(35, 142, 51);
+            
+    
+                .mt{
+                    text-align: right;
+                    margin-right: 2px;
+                }
+            }
+        }
+        
+    }
+}
+
+@include R.Rwd(md){
+    %mdWHIn{
+        @include WH.WH(10%, 10%);
+    }
+    %mdW100{
+        @include WH.W(10%);
+    }
+    %mdDisplayNoneIn{
+        display: none;
+    }
+    %mdJustifyAlign{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #rest1{
+
+    }
+}
+
+@include R.Rwd(lg){
+    #rest1{
+       
+        > header{
+            $MenuWidth: 10%;
+            #menu{
+                width: $MenuWidth;
+                background-color: blueviolet;
+
+                #Logo{
+                    width: calc( 100% - $MenuWidth );
+                }
+            }
+        }
+
+        > #main{
+            
+            nav{
+                ul{
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    li{
+                        
+                    }
+                }
+            }
+
+            > footer{
+                
+                ul{
+                    font-size: 1rem * 0.9;
+                }
+                .ConnBox{
+                    width: 50%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    //background-color: aqua;
+
+                    li{
+                        width: 50%;
+                    }
+                }
+                .mt{
+                    text-align: center;
+                    margin-right: 0;
+                }
+
+            }
+        }
+    }
+}
